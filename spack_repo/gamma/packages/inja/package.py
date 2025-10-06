@@ -60,6 +60,7 @@ class Inja(CMakePackage):
 
     depends_on("cxx", type="build")
     depends_on("nlohmann-json@3.8.0:")
+    depends_on("doctest")
 
     def cmake_args(self):
         args = [
