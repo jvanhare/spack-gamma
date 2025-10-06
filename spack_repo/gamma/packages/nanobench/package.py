@@ -59,3 +59,11 @@ class Nanobench(CMakePackage):
     )
 
     depends_on("cxx", type="build")
+
+    build_system("generic")
+
+    def build(self, spec, prefix):
+        pass
+
+    def install(self, spec, prefix):
+        install_tree("src/include", prefix.include)
