@@ -61,11 +61,10 @@ class Inja(CMakePackage):
     depends_on("cxx", type="build")
     depends_on("nlohmann-json@3.8.0:")
 
-    def cmake_args(self):
-        args = [
-            "-DCMAKE_BUILD_TYPE=Release",
-            "-DBUILD_SHARED_LIBS=ON",
-            "-DINJA_USE_EMBEDDED_JSON=OFF",
-            "-BUILD_TESTING=OFF",
-        ]
-        return args
+    build_system("generic")
+
+    def build(self, spec, prefix):
+        pass
+
+    def install(self, spec, prefix):
+        install_tree("include", prefix.include)
