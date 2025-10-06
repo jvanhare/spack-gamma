@@ -19,6 +19,7 @@ class Libmeshb(CMakePackage):
         sha256="db9d3091ecb7fb3478c26f0ca51535cb9f0bbac4beed7f2c9fdb539880f4a957",
     )
     depends_on("c", type="build")
+    depends_on("fortran", type="build")
     depends_on("cmake", type="build")
 
     def cmake_args(self):
