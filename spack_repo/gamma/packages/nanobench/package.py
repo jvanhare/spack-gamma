@@ -7,7 +7,7 @@ from spack_repo.builtin.build_systems.cmake import CMakePackage
 from spack.package import *
 
 
-class Nanobench(CMakePackage):
+class Nanobench(Package):
     """Simple, fast, accurate single-header microbenchmarking functionality for C++11/14/17/20."""
 
     homepage = "https://github.com/martinus/nanobench"
