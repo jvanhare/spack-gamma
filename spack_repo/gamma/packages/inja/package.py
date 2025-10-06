@@ -66,6 +66,5 @@ class Inja(CMakePackage):
             "-DCMAKE_BUILD_TYPE=Release",
             "-DBUILD_SHARED_LIBS=ON",
             "-DINJA_USE_EMBEDDED_JSON=OFF",
-            "-BUILD_TESTING=OFF",
         ]
         return args
