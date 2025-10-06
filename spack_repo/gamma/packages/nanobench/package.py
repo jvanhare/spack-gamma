@@ -66,4 +66,8 @@ class Nanobench(Package):
         pass
 
     def install(self, spec, prefix):
-        install_tree("src/include", prefix.include)
+        mkdirp(join_path(prefix.include, "nanobench"))
+        install(
+            "src/include/nanobench.h",
+            join_path(prefix.include, "nanobench", "nanobench.h"),
+        )
