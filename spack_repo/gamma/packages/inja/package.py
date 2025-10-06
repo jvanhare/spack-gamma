@@ -7,7 +7,7 @@ from spack_repo.builtin.build_systems.cmake import CMakePackage
 from spack.package import *
 
 
-class Inja(CMakePackage):
+class Inja(Package):
     """A Template Engine for Modern C++."""
 
     homepage = "https://github.com/pantor/inja"
@@ -60,6 +60,8 @@ class Inja(CMakePackage):
 
     depends_on("cxx", type="build")
     depends_on("nlohmann-json@3.8.0:")
+
+    build_system("generic")
 
     def build(self, spec, prefix):
         pass
