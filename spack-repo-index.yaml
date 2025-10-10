@@ -1,3 +1,4 @@
 repo_index:
   paths:
     - spack_repo/gamma
+    - spack_repo/arcane
