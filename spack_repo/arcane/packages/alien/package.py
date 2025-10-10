@@ -44,12 +44,12 @@ class Alien(CMakePackage):
     variant("hdf5", description="hdf5 export for Alien", default=False)
     variant("xml", description="xml export for Alien", default=True)
     variant("move", description="Move Semantic api for Alien", default=True)
-    variant("ref", description="Ref Semantic api for Alien", default=True)
+    variant("reference", description="Ref Semantic api for Alien", default=True)
 
     variant("hypre", description="Enable hypre backend", default=False)
     variant("petsc", description="Enable PETSc backend", default=False)
 
-    ginkgo_backends = ("omp", "ref", "cuda", "hip", "dpcpp")
+    ginkgo_backends = ("omp", "reference", "cuda", "hip", "dpcpp")
     variant(
         "ginkgo",
         description="Enable Ginkgo specific backend",
@@ -59,7 +59,7 @@ class Alien(CMakePackage):
         when="@1.1.3:",
     )
 
-    trilinos_backends = ("omp", "ref", "cuda", "hip")
+    trilinos_backends = ("omp", "reference", "cuda", "hip")
     variant(
         "trilinos",
         description="Enable Trilinos specific backend",
@@ -110,7 +110,7 @@ class Alien(CMakePackage):
             self.define_from_variant("ALIEN_USE_HDF5", "hdf5"),
             self.define_from_variant("ALIEN_USE_XML", "xml"),
             self.define_from_variant("ALIEN_COMPONENT_MoveSemantic", "move"),
-            self.define_from_variant("ALIEN_COMPONENT_RefSemantic", "ref"),
+            self.define_from_variant("ALIEN_COMPONENT_RefSemantic", "reference"),
             self.define_from_variant("ALIEN_PLUGIN_HYPRE", "hypre"),
             self.define_from_variant("ALIEN_HYPRE_DEVICE", "hypre_device"),
             self.define_from_variant("ALIEN_PLUGIN_PETSC", "petsc"),
