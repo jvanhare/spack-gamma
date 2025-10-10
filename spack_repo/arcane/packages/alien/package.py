@@ -49,15 +49,15 @@ class Alien(CMakePackage):
     variant("hypre", description="Enable hypre backend", default=False)
     variant("petsc", description="Enable PETSc backend", default=False)
 
-    ginkgo_backends = ("omp", "reference", "cuda", "hip", "dpcpp")
-    variant(
-        "ginkgo",
-        description="Enable Ginkgo specific backend",
-        default="none",
-        values=ginkgo_backends + ("none",),
-        multi=False,
-        when="@1.1.3:",
-    )
+    # ginkgo_backends = ("omp", "reference", "cuda", "hip", "dpcpp")
+    # variant(
+    #     "ginkgo",
+    #     description="Enable Ginkgo specific backend",
+    #     default="none",
+    #     values=ginkgo_backends + ("none",),
+    #     multi=False,
+    #     when="@1.1.3:",
+    # )
 
     trilinos_backends = ("omp", "reference", "cuda", "hip")
     variant(
@@ -76,10 +76,10 @@ class Alien(CMakePackage):
     depends_on("hypre +mpi", when="+hypre")
     depends_on("petsc +mpi", when="+petsc")
 
-    depends_on("ginkgo +cuda", when="ginkgo=cuda")
-    depends_on("ginkgo +openmp", when="ginkgo=omp")
-    depends_on("ginkgo +rocm", when="ginkgo=hip")
-    depends_on("ginkgo", when="ginkgo=ref")
+    # depends_on("ginkgo +cuda", when="ginkgo=cuda")
+    # depends_on("ginkgo +openmp", when="ginkgo=omp")
+    # depends_on("ginkgo +rocm", when="ginkgo=hip")
+    # depends_on("ginkgo", when="ginkgo=ref")
 
     trilinos_variants = "+tpetra +kokkos +belos +ifpack2"
     depends_on("trilinos {}".format(trilinos_variants), when="trilinos=ref")
@@ -131,7 +131,7 @@ class Alien(CMakePackage):
                             )
                         )
 
-        multivariant("ginkgo", self.ginkgo_backends)
+        # multivariant("ginkgo", self.ginkgo_backends)
         multivariant("trilinos", self.trilinos_backends)
 
         return options
