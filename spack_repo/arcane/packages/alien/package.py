@@ -59,15 +59,15 @@ class Alien(CMakePackage):
     #     when="@1.1.3:",
     # )
 
-    trilinos_backends = ("omp", "reference", "cuda", "hip")
-    variant(
-        "trilinos",
-        description="Enable Trilinos specific backend",
-        default="none",
-        values=trilinos_backends + ("none",),
-        multi=False,
-        when="@1.1.4:",
-    )
+    # trilinos_backends = ("omp", "reference", "cuda", "hip")
+    # variant(
+    #     "trilinos",
+    #     description="Enable Trilinos specific backend",
+    #     default="none",
+    #     values=trilinos_backends + ("none",),
+    #     multi=False,
+    #     when="@1.1.4:",
+    # )
 
     variant(
         "hypre_device", description="Force GPU offloading with hypre", default=False
@@ -81,11 +81,11 @@ class Alien(CMakePackage):
     # depends_on("ginkgo +rocm", when="ginkgo=hip")
     # depends_on("ginkgo", when="ginkgo=ref")
 
-    trilinos_variants = "+tpetra +kokkos +belos +ifpack2"
-    depends_on("trilinos {}".format(trilinos_variants), when="trilinos=ref")
-    depends_on("trilinos {} +cuda".format(trilinos_variants), when="trilinos=cuda")
-    depends_on("trilinos {} +rocm".format(trilinos_variants), when="trilinos=hip")
-    depends_on("trilinos {} +openmp".format(trilinos_variants), when="trilinos=omp")
+    # trilinos_variants = "+tpetra +kokkos +belos +ifpack2"
+    # depends_on("trilinos {}".format(trilinos_variants), when="trilinos=ref")
+    # depends_on("trilinos {} +cuda".format(trilinos_variants), when="trilinos=cuda")
+    # depends_on("trilinos {} +rocm".format(trilinos_variants), when="trilinos=hip")
+    # depends_on("trilinos {} +openmp".format(trilinos_variants), when="trilinos=omp")
 
     depends_on("cmake", type="build")
 
@@ -132,6 +132,6 @@ class Alien(CMakePackage):
                         )
 
         # multivariant("ginkgo", self.ginkgo_backends)
-        multivariant("trilinos", self.trilinos_backends)
+        # multivariant("trilinos", self.trilinos_backends)
 
         return options
