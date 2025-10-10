@@ -1,4 +1,6 @@
 from spack.package import *
+from spack_repo.builtin.build_systems.cmake import CMakePackage
+
 
 class Arccore(CMakePackage):
     """Base functionalities for simulation codes."""

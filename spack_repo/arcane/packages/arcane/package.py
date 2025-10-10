@@ -1,4 +1,10 @@
 from spack.package import *
+from spack_repo.builtin.build_systems.cmake import (
+    CMakePackage,
+    CudaPackage,
+    ROCmPackage,
+)
+
 
 class Arcane(CMakePackage, CudaPackage, ROCmPackage):
     """Arcane Framework"""
@@ -51,7 +57,11 @@ class Arcane(CMakePackage, CudaPackage, ROCmPackage):
 
     variant("build_tests", default=True, description="Compile tests")
 
-    variant("cuda_clang", default=False, description="Use clang (instead of nvcc) to compile CUDA code")
+    variant(
+        "cuda_clang",
+        default=False,
+        description="Use clang (instead of nvcc) to compile CUDA code",
+    )
 
     depends_on("c", type="build")
     depends_on("cxx", type="build")
@@ -131,7 +141,7 @@ class Arcane(CMakePackage, CudaPackage, ROCmPackage):
             "hypre": "Hypre",
             "trilinos": "Trilinos",
             "lima": "Lima",
-            "dotnet_wrapper": ["SWIG", "CoreClrEmbed"]
+            "dotnet_wrapper": ["SWIG", "CoreClrEmbed"],
         }
         return ";".join(
             map(
@@ -159,15 +169,17 @@ class Arcane(CMakePackage, CudaPackage, ROCmPackage):
         components_to_build = "Arcane"
         if "+alien" in self.spec:
             components_to_build = "Arcane;Alien"
-        args.append(self.define("ARCANEFRAMEWORK_BUILD_COMPONENTS", components_to_build))
+        args.append(
+            self.define("ARCANEFRAMEWORK_BUILD_COMPONENTS", components_to_build)
+        )
 
         default_partitionner = "Auto"
         args.append(self.define("ARCANE_DEFAULT_PARTITIONER", default_partitionner))
         args.append(self.define("ARCANE_REQUIRED_PACKAGE_LIST", self.build_required()))
 
         if "+alien" in self.spec:
-            self.define("ALIEN_DEFAULT_OPTIONS", False),
-            self.define_from_variant("ALIEN_PLUGIN_HYPRE", "hypre"),
+            (self.define("ALIEN_DEFAULT_OPTIONS", False),)
+            (self.define_from_variant("ALIEN_PLUGIN_HYPRE", "hypre"),)
 
         if "+rocm" in self.spec:
             args.append(self.define("ARCANE_ACCELERATOR_MODE", "ROCM"))
@@ -178,7 +190,12 @@ class Arcane(CMakePackage, CudaPackage, ROCmPackage):
             args.append(self.define("ARCANE_ACCELERATOR_MODE", "CUDA"))
             # Experimental: use clang to compile CUDA code
             if "+cuda_clang" in self.spec:
-                args.append(self.define("CMAKE_CUDA_COMPILER", join_path(self.spec["llvm"].prefix.bin, "clang++")))
+                args.append(
+                    self.define(
+                        "CMAKE_CUDA_COMPILER",
+                        join_path(self.spec["llvm"].prefix.bin, "clang++"),
+                    )
+                )
 
             cuda_arch = self.spec.variants["cuda_arch"].value
             if cuda_arch:

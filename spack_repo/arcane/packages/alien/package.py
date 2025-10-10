@@ -1,4 +1,6 @@
 from spack.package import *
+from spack_repo.builtin.build_systems.cmake import CMakePackage
+
 
 class Alien(CMakePackage):
     """Alien: Generic API for Linear Algebra."""
